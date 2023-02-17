@@ -6,7 +6,8 @@ import trackerApi from '../api/tracker.js'
 const authReducer = (state, action) => {
 
   switch(action.type){
-
+    case 'add_error':
+      return {...state, errorMessage: action.payload}
     default:
       return state;
   }
@@ -20,6 +21,7 @@ const signUp = dispatch => {
       const response = await trackerApi.post('/signup', {email: email, password: password})
       console.log(response.data)
     } catch (error) {
+      // NOTE by supplying dispatch with a type and payload we can change our state based on certain circumstances
       dispatch({type: 'add_error', payload: `Something went wrong with signup`})
     }
   }
