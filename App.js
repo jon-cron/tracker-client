@@ -11,6 +11,7 @@ import AccountScreen from './src/screens/AccountScreen.js'
 import TrackCreateScreen from './src/screens/TrackCreateScreen.js'
 import TrackDetailScreen from './src/screens/TrackDetailScreen.js'
 import TrackListScreen from './src/screens/TrackListScreen.js'
+import {Provider as AuthProvider} from './src/context/AuthContext.js'
 
 const switchNavigator = createSwitchNavigator({
 loginFlow: createStackNavigator({
@@ -27,4 +28,16 @@ mainFlow: createMaterialBottomTabNavigator({
   Account: AccountScreen,
 })
 })
-export default createAppContainer(switchNavigator)
+
+// NOTE default basic app export
+// export default createAppContainer(switchNavigator)
+// NOTE when dealing with context do this
+const App = createAppContainer(switchNavigator)
+// NOTE this gives the entire app access to the information in AuthProvider
+export default () => {
+  return (
+    <AuthProvider>
+      <App/>
+    </AuthProvider>
+  )
+}
