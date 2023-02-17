@@ -14,13 +14,13 @@ const authReducer = (state, action) => {
 
 // NOTE Action functions will go here 
 
-const signUp = (dispatch) => {
+const signUp = dispatch => {
   return async ({email, password}) =>{
     try {
-      const response = await trackerApi.post('signup', {email, password})
+      const response = await trackerApi.post('/signup', {email: email, password: password})
       console.log(response.data)
     } catch (error) {
-      console.log(error.message);
+      dispatch({type: 'add_error', payload: `Something went wrong with signup`})
     }
   }
 }
@@ -41,5 +41,5 @@ export const {Provider, Context} = createDataContext(
   authReducer,
   // NOTE any function I want triggered from other screens place in this object
   {signIn, signUp, signOut},
-  {isSignedIn: false}
+  {isSignedIn: false, errorMessage: ''}
 )

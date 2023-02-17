@@ -32,7 +32,7 @@ return (
       secureTextEntry
       label="Password"
       value={password}
-      onChange={setPassword}/>
+      onChangeText={setPassword}/>
     <Spacer>
     <Button 
       title="SignUp"
