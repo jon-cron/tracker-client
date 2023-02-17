@@ -1,5 +1,5 @@
 // NOTE this file allows files that are not components to utilize navigation
-import { NavigationAction } from "react-navigation";
+import { NavigationActions } from "react-navigation";
 
 let navigator;
 
@@ -9,7 +9,7 @@ export const setNavigator = (nav) => {
 
 export const navigate = (routeName, params) => {
   navigator.dispatch(
-    NavigationAction.navigate({
+    NavigationActions.navigate({
       routeName,
       params
     })
