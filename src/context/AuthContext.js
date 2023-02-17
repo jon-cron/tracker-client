@@ -21,15 +21,19 @@ const authReducer = (state, action) => {
 const signUp = dispatch => async ({email, password}) =>{
     try {
       const response = await trackerApi.post('/signup', {email: email, password: password})
+      // NOTE locally store token
       await AsyncStorage.setItem('token', response.data.token)
+      // NOTE update our state
       dispatch({type: 'signup', payload: response.data.token})
+      // NOTE navigate
+      
     } catch (error) {
       // NOTE by supplying dispatch with a type and payload we can change our state based on certain circumstances
       dispatch({type: 'add_error', payload: `Something went wrong with signup`})
     }
   }
 
-  
+
 const signIn = (dispatch) => {
   return ({email, password}) =>{
 
