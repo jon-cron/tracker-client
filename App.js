@@ -1,7 +1,7 @@
 // FIXME come back and create a snippet for the app.js page so you don't have to write this out
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 // NOTE swtichNavigator is an abrupt navigator which is commonly used to switch from a login page
+// NOTE use yarn add react-native-elements
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
@@ -17,6 +17,7 @@ loginFlow: createStackNavigator({
   Signup: SignUpScreen,
   SignIn: SignInScreen,
 }),
+// NOTE this bottom tab automatically assigns a page to a button. 
 mainFlow: createMaterialBottomTabNavigator({
   trackListFlow: createStackNavigator({
     TrackList: TrackListScreen,
