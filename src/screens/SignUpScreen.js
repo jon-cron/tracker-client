@@ -10,7 +10,6 @@ const SignUpScreen = ({navigation}) => {
   const {state, signUp} = useContext(AuthContext)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
 // NOTE now using react-native-elements imports
 return (
   <View style={styles.container}>
@@ -34,6 +33,7 @@ return (
       value={password}
       onChangeText={setPassword}/>
     <Spacer>
+      {state.errorMessage ? <Text>{state.errorMessage}</Text> : null}
     <Button 
       title="SignUp"
       onPress={() => signUp({email, password})}/>
