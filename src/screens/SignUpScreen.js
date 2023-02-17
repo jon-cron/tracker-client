@@ -1,10 +1,13 @@
-import React, {useState} from 'react';
+// NOTE anytime you want to use context from another file you must also import useContext from react
+import React, {useState, useContext} from 'react';
 import { View, StyleSheet } from 'react-native';
 import {Text, Input, Button} from 'react-native-elements'
 // NOTE this is a utility class that provides margin to where ever it is place
 import Spacer from "../components/Spacer.js";
+import { Context as AuthContext } from "../context/AuthContext.js";
 
 const SignUpScreen = ({navigation}) => {
+  const {state, signUp} = useContext(AuthContext)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -31,7 +34,9 @@ return (
       value={password}
       onChange={setPassword}/>
     <Spacer>
-    <Button title="SignUp"/>
+    <Button 
+      title="SignUp"
+      onPress={() => signUp({email, password})}/>
     </Spacer>
   </View>
 )
