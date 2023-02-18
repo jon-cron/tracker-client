@@ -18,8 +18,12 @@ const startWatching = async () => {
     await watchPositionAsync({
       // NOTE this can be altered to save the users battery life but if you need very specific location for your app make it very accurate as seen here 
       accuracy: Accuracy.BestForNavigation,
-      // NOTE how often we are updating the users location in milli
-      timeInterval: 1000
+      // NOTE how often we are updating the users location in milliseconds
+      timeInterval: 1000,
+      // NOTE this tells expo to update the location if the user travels 10 meters before the timeInterval is met
+      distanceInterval: 10
+    }, (location) => {
+      // console.log(location)
     })
     if (!granted) {
       throw new Error('Location permission not granted');
