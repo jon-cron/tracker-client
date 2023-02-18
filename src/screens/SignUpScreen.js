@@ -1,5 +1,5 @@
 // NOTE anytime you want to use context from another file you must also import useContext from react
-import React, {useEffect, useContext} from 'react';
+import React, {useContext} from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import {Text, Input, Button} from 'react-native-elements'
 import AuthForm from "../components/AuthForm.js";
@@ -10,11 +10,13 @@ import { NavigationEvents } from "react-navigation";
 import { Context as AuthContext } from "../context/AuthContext.js";
 
 const SignUpScreen = ({navigation}) => {
-  const {state, signUp, clearErrorMessage, tryLocalSignIn} = useContext(AuthContext)
+  const {state, signUp, clearErrorMessage} = useContext(AuthContext)
 
-  useEffect(() => {
-    tryLocalSignIn();
-  }, [])
+
+  // NOTE this useEffect would automatically signin the user but would cause bad UI by showing the signup screen for a split second
+  // useEffect(() => {
+  //   tryLocalSignIn();
+  // }, [])
 // NOTE now using react-native-elements imports
 return (
   <View style={styles.container}>

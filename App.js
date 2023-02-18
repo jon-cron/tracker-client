@@ -13,8 +13,10 @@ import TrackDetailScreen from './src/screens/TrackDetailScreen.js'
 import TrackListScreen from './src/screens/TrackListScreen.js'
 import {Provider as AuthProvider} from './src/context/AuthContext.js'
 import { setNavigator } from "./src/utility/navigationRef.js";
+import StartScreen from "./src/screens/StartScreen.js";
 
 const switchNavigator = createSwitchNavigator({
+  Start: StartScreen,
 loginFlow: createStackNavigator({
   Signup: SignUpScreen,
   SignIn: SignInScreen,
