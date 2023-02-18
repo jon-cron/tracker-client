@@ -1,24 +1,22 @@
-import React from 'react';
-import { Text, StyleSheet  } from 'react-native';
+import React, {useContext} from 'react';
+import { Text, StyleSheet, ActivityIndicator  } from 'react-native';
 // NOTE this is now a dep you must install npx install react-native-maps
 import MapView, {Polyline} from "react-native-maps";
-
+import {Context as LocationContext} from '../context/LocationContext.js'
 
 const Map = () => {
-  let points = [];
-  for (let i=0; i<20; i++){
-    points.push({
-      latitude: 43.620210 + i * 0.001,
-      longitude: -116.202458 + i * 0.001
-    })
-  }
+const {state: {currentLocation}} = useContext(LocationContext)
 // NOTE foreground location tracking is the ability to use the users location when the app is open, Background location tracking is all the time. react-native udemy Video-236
+// console.log(state)
+
+  if(!currentLocation){
+    return <ActivityIndicator size="large" style={{marginTop: 20}} />
+  }
 
 return <MapView 
   style={styles.map}
   initialRegion={{
-    latitude: 43.620210,
-    longitude: -116.202458,
+    ...currentLocation.coords,
     latitudeDelta:0.01,
     longitudeDelta:0.01
     // NOTE the first two are the location, the second two are the amount of zoom
@@ -26,10 +24,13 @@ return <MapView
     // longitude: -116.202458,
     // latitudeDelta:0.1,
     // longitudeDelta:0.1
-  }}>
-    <Polyline coordinates={points}/>
-  </MapView>
-
+  }}
+  region={{
+    ...currentLocation.coords,
+    latitudeDelta:0.01,
+    longitudeDelta:0.01
+  }}
+  />
 };
 
 const styles = StyleSheet.create({

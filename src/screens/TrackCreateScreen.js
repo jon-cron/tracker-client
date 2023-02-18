@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {StyleSheet } from 'react-native';
 import { Text } from "react-native-elements";
 import Map from "../components/Map.js";
@@ -6,9 +6,11 @@ import { SafeAreaView } from "react-navigation";
 import Spacer from "../components/Spacer.js";
 import { requestForegroundPermissionsAsync, watchPositionAsync, Accuracy } from 'expo-location';
 import '../_mockLocation.js'
+import { Context as LocationContext } from "../context/LocationContext.js";
 
 
 const TrackCreateScreen = () => {
+  const {addLocation} = useContext(LocationContext)
   const [error, setError] = useState(null)
 
 
@@ -23,7 +25,8 @@ const startWatching = async () => {
       // NOTE this tells expo to update the location if the user travels 10 meters before the timeInterval is met
       distanceInterval: 10
     }, (location) => {
-      // console.log(location)
+      // NOTE this is taking the users current location and sending it to the context through this function
+      addLocation(location)
     })
     if (!granted) {
       throw new Error('Location permission not granted');
