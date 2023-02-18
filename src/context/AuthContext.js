@@ -9,14 +9,22 @@ const authReducer = (state, action) => {
   switch(action.type){
     case 'add_error':
       return {...state, errorMessage: action.payload}
-    case 'signup':
+    case 'signin':
       return {...state, token: action.payload}
+    case 'clear_error_message':
+      return {...state, errorMessage: ''}
     default:
       return state;
   }
 }
 
 // NOTE Action functions will go here 
+
+  const clearErrorMessage = dispatch => () => {
+    dispatch({
+      type: 'clear_error_message',
+    })
+  }
 
 const signUp = dispatch => async ({email, password}) =>{
     try {
@@ -25,7 +33,7 @@ const signUp = dispatch => async ({email, password}) =>{
       await AsyncStorage.setItem('token', response.data.token)
       console.log('Success', response.data.token)
       // NOTE update our state
-      dispatch({type: 'signup', payload: response.data.token})
+      dispatch({type: 'signin', payload: response.data.token})
       console.log('Success')
       // NOTE navigate
       navigate('TrackList')
@@ -36,12 +44,23 @@ const signUp = dispatch => async ({email, password}) =>{
     }
   }
 
-
-const signIn = (dispatch) => {
-  return ({email, password}) =>{
-
+const signIn = (dispatch) => async ({email, password}) =>{
+    try {
+      const response = await trackerApi.post('/signin', {email: email, password: password})
+      await AsyncStorage.setItem('token', response.data.token);
+      dispatch({
+        type: 'signin',
+        payload: response.data.token
+      })
+      navigate('TrackList')
+    } catch (error) {
+      dispatch({
+        type: 'add_error',
+        payload: 'Something went wrong with signin'
+      })
+    }
   }
-}
+
 const signOut = (dispatch) => {
   return () =>{
 
@@ -53,6 +72,6 @@ const signOut = (dispatch) => {
 export const {Provider, Context} = createDataContext(
   authReducer,
   // NOTE any function I want triggered from other screens place in this object
-  {signIn, signUp, signOut},
+  {signIn, signUp, signOut, clearErrorMessage},
   {token: null, errorMessage: ''}
 )
