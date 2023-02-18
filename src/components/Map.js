@@ -40,3 +40,22 @@ map: {
 
 
 export default Map;
+// NOTE bad
+// const startWatching = async () => {
+//   try {
+//     await requestPermissionsAsync();
+//   } catch (e) {
+//     setErr(e);
+//   }
+// };
+// NOTE better
+// const startWatching = async () => {
+//   try {
+//     const { granted } = await requestPermissionsAsync();
+//     if (!granted) {
+//       throw new Error('Location permission not granted');
+//     }
+//   } catch (e) {
+//     setErr(e);
+//   }
+// };
