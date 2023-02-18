@@ -12,7 +12,7 @@ const Map = () => {
       longitude: -116.202458 + i * 0.001
     })
   }
-
+// NOTE foreground location tracking is the ability to use the users location when the app is open, Background location tracking is all the time. react-native udemy Video-236
 
 return <MapView 
   style={styles.map}
