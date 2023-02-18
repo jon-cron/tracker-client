@@ -59,3 +59,5 @@ export default Map;
 //     setErr(e);
 //   }
 // };
+// import { requestForegroundPermissionsAsync } from 'expo-location';
+// const { granted } = await requestForegroundPermissionsAsync();
