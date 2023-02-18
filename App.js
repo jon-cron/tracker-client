@@ -14,6 +14,7 @@ import TrackListScreen from './src/screens/TrackListScreen.js'
 import {Provider as AuthProvider} from './src/context/AuthContext.js'
 import { setNavigator } from "./src/utility/navigationRef.js";
 import StartScreen from "./src/screens/StartScreen.js";
+import {Provider as LocationProvider } from './src/context/LocationContext.js'
 
 const switchNavigator = createSwitchNavigator({
   Start: StartScreen,
@@ -39,10 +40,12 @@ const App = createAppContainer(switchNavigator)
 // NOTE this gives the entire app access to the information in AuthProvider
 export default () => {
   return (
+    <LocationProvider>
     <AuthProvider>
       {/* NOTE this line of code right here allows all files to use navigation */}
       <App ref={(navigator) => {setNavigator(navigator)}}/>
     </AuthProvider>
+    </LocationProvider>
   )
 }
 
