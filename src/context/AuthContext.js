@@ -20,6 +20,16 @@ const authReducer = (state, action) => {
 
 // NOTE Action functions will go here 
 
+const tryLocalSignIn = dispatch => async () => {
+  const token = await AsyncStorage.getItem('token');
+  if(token) {
+    dispatch({ type: 'signin', payload: token});
+    navigate('TrackList')
+  } else {
+    navigate('SignUp')
+  }
+}
+
   const clearErrorMessage = dispatch => () => {
     dispatch({
       type: 'clear_error_message',
@@ -72,6 +82,6 @@ const signOut = (dispatch) => {
 export const {Provider, Context} = createDataContext(
   authReducer,
   // NOTE any function I want triggered from other screens place in this object
-  {signIn, signUp, signOut, clearErrorMessage},
+  {signIn, signUp, signOut, clearErrorMessage, tryLocalSignIn},
   {token: null, errorMessage: ''}
 )
