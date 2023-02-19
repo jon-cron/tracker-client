@@ -7,6 +7,7 @@ import Spacer from "../components/Spacer.js";
 import '../_mockLocation.js'
 import { Context as LocationContext } from "../context/LocationContext.js";
 import useLocation from "../hooks/useLocation.js";
+import TrackForm from "../components/TrackForm.js";
 
 // NOTE 'isFocused' comes from withNavigation focus which will flip a boolean whether the page is infocus or not
 const TrackCreateScreen = ({isFocused}) => {
@@ -24,6 +25,7 @@ return (
     <Map/>
     {error? <Text>Please enable location services</Text> : null}
     </Spacer>
+    <TrackForm/>
   </SafeAreaView>
 )
 };
