@@ -13,7 +13,7 @@ const {
   stopRecording, 
   changeName
 } = useContext(LocationContext)
-// console.log(recording)
+console.log(recording)
 return (
   <>
   <Spacer>
