@@ -11,9 +11,11 @@ import TrackForm from "../components/TrackForm.js";
 
 // NOTE 'isFocused' comes from withNavigation focus which will flip a boolean whether the page is infocus or not
 const TrackCreateScreen = ({isFocused}) => {
-  const {addLocation} = useContext(LocationContext)
+  const { state,addLocation} = useContext(LocationContext)
 
-const [error] = useLocation(isFocused, addLocation)
+const [error] = useLocation(isFocused, location => {
+  addLocation(location, state.recording);
+})
 
 // console.log(isFocused)
 
