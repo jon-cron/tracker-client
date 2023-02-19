@@ -8,12 +8,12 @@ import { Context as LocationContext } from "../context/LocationContext.js";
 const TrackForm = () => {
   // NOTE we are bringing in functions and state that we wish to change through context
 const {
-  state: {name, recording}, 
+  state: {name, recording, locations}, 
   startRecording, 
   stopRecording, 
   changeName
 } = useContext(LocationContext)
-console.log(recording)
+console.log(locations.length)
 return (
   <>
   <Spacer>
