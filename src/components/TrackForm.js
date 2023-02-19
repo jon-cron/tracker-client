@@ -5,7 +5,7 @@ import Spacer from "./Spacer.js";
 import { Context as LocationContext } from "../context/LocationContext.js";
 
 
-const TrackForm = ({navigation}) => {
+const TrackForm = () => {
   // NOTE we are bringing in functions and state that we wish to change through context
 const {
   state: {name, recording}, 
@@ -13,7 +13,7 @@ const {
   stopRecording, 
   changeName
 } = useContext(LocationContext)
-
+// console.log(recording)
 return (
   <>
   <Spacer>
@@ -22,13 +22,9 @@ return (
     // NOTE if we didn't specify which state we would like above I would have had to set the value to "{state.name}"
     value={name}
     onChangeText={changeName}/>
-    {recording ?
-  <Button 
-    title="Stop Recording"
-    onPress={stopRecording}/> :
-    <Button 
-      title="Start Recording"
-      onPress={startRecording}/>
+    {recording 
+    ? <Button title="Stop Recording" onPress={stopRecording}/> 
+    : <Button title="Start Recording" onPress={startRecording}/>
     }
   </Spacer>
   </>
