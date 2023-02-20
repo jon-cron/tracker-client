@@ -5,7 +5,7 @@ import MapView, {Polyline, Circle} from "react-native-maps";
 import {Context as LocationContext} from '../context/LocationContext.js'
 
 const Map = () => {
-const {state: {currentLocation}} = useContext(LocationContext)
+const {state: {currentLocation, locations}} = useContext(LocationContext)
 // NOTE foreground location tracking is the ability to use the users location when the app is open, Background location tracking is all the time. react-native udemy Video-236
 // console.log(state)
 
@@ -43,6 +43,7 @@ return <MapView
     strokeColor="rgba(158,158,255,1.0)"
     fillColor="rgba(158,158,255,0.3)"
     />
+    <Polyline coordinates={locations.map(l => l.coords)}/>
   </MapView>
 };
 

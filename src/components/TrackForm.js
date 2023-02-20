@@ -13,7 +13,6 @@ const {
   stopRecording, 
   changeName
 } = useContext(LocationContext)
-console.log(locations.length)
 return (
   <>
   <Spacer>
@@ -26,6 +25,8 @@ return (
     ? <Button title="Stop Recording" onPress={stopRecording}/> 
     : <Button title="Start Recording" onPress={startRecording}/>
     }
+    <Spacer/>
+    {!recording && locations.length > 0 ? <Button title="Save Track"/> : null}
   </Spacer>
   </>
 )
