@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import {Input, Button} from 'react-native-elements'
 import Spacer from "./Spacer.js";
 import { Context as LocationContext } from "../context/LocationContext.js";
-
+import useSaveTrack from "../hooks/useSaveTrack.js";
 
 const TrackForm = () => {
   // NOTE we are bringing in functions and state that we wish to change through context
@@ -12,7 +12,9 @@ const {
   startRecording, 
   stopRecording, 
   changeName
-} = useContext(LocationContext)
+} = useContext(LocationContext);
+
+const [saveTrack] = useSaveTrack()
 return (
   <>
   <Spacer>
@@ -26,7 +28,7 @@ return (
     : <Button title="Start Recording" onPress={startRecording}/>
     }
     <Spacer/>
-    {!recording && locations.length > 0 ? <Button title="Save Track"/> : null}
+    {!recording && locations.length > 0 ? <Button title="Save Track" onPress={saveTrack}/> : null}
   </Spacer>
   </>
 )
