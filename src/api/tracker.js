@@ -5,8 +5,12 @@
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default axios.create({
+const instance = axios.create({
   baseURL: 'http://8fa9-75-174-192-122.ngrok.io'
-})
+});
+
+
+
+
 
 // NOTE npm install -g ngrok then ngrok http 3000 to connect the link to localhost3000
