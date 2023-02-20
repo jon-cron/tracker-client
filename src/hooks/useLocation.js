@@ -28,7 +28,7 @@ export default (shouldTrack, callback) => {
       setError(error);
     }
   };
-// NOTE if the [] in useEffect is blank the function will only run once upon page load, but if we throw a variable in the [] useEffect will look for a change everytime the function runs
+// NOTE if the [] in useEffect is blank the function will only run once upon page load, but if we throw a variable in the [] useEffect will look for a change every time the function runs
   useEffect(()=> {
     if(shouldTrack){
       startWatching();
@@ -36,7 +36,7 @@ export default (shouldTrack, callback) => {
       subscriber.remove()
       setSubscriber(null)
     }
-  }, [shouldTrack])
+  }, [shouldTrack, callback])
 
   return [error]
 }

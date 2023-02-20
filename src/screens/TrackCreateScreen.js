@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useCallback} from 'react';
 import {StyleSheet } from 'react-native';
 import { Text } from "react-native-elements";
 import Map from "../components/Map.js";
@@ -11,11 +11,11 @@ import TrackForm from "../components/TrackForm.js";
 
 // NOTE 'isFocused' comes from withNavigation focus which will flip a boolean whether the page is infocus or not
 const TrackCreateScreen = ({isFocused}) => {
-  const { state,addLocation} = useContext(LocationContext)
-
-const [error] = useLocation(isFocused, location => {
-  addLocation(location, state.recording);
-})
+  const { state, addLocation} = useContext(LocationContext)
+  const callback = useCallback(location => {
+    addLocation(location, state.recording);
+  }, [state.recording])
+const [error] = useLocation(isFocused, callback)
 
 // console.log(isFocused)
 
