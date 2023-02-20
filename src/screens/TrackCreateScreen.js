@@ -11,11 +11,11 @@ import TrackForm from "../components/TrackForm.js";
 
 // NOTE 'isFocused' comes from withNavigation focus which will flip a boolean whether the page is in focus or not
 const TrackCreateScreen = ({isFocused}) => {
-  const { state, addLocation} = useContext(LocationContext)
+  const { state: {recording}, addLocation} = useContext(LocationContext)
   const callback = useCallback(location => {
-    addLocation(location, state.recording);
-  }, [state.recording])
-const [error] = useLocation(isFocused, callback)
+    addLocation(location, recording);
+  }, [recording])
+const [error] = useLocation(isFocused || recording, callback)
 
 // console.log(isFocused)
 
