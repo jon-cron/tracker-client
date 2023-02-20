@@ -9,7 +9,7 @@ import { Context as LocationContext } from "../context/LocationContext.js";
 import useLocation from "../hooks/useLocation.js";
 import TrackForm from "../components/TrackForm.js";
 
-// NOTE 'isFocused' comes from withNavigation focus which will flip a boolean whether the page is infocus or not
+// NOTE 'isFocused' comes from withNavigation focus which will flip a boolean whether the page is in focus or not
 const TrackCreateScreen = ({isFocused}) => {
   const { state, addLocation} = useContext(LocationContext)
   const callback = useCallback(location => {
