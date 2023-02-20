@@ -1,6 +1,6 @@
 // FIXME come back and create a snippet for the app.js page so you don't have to write this out
 import { StatusBar } from 'expo-status-bar';
-// NOTE swtichNavigator is an abrupt navigator which is commonly used to switch from a login page
+// NOTE switchNavigator is an abrupt navigator which is commonly used to switch from a login page
 // NOTE use yarn add react-native-elements
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -15,6 +15,7 @@ import {Provider as AuthProvider} from './src/context/AuthContext.js'
 import { setNavigator } from "./src/utility/navigationRef.js";
 import StartScreen from "./src/screens/StartScreen.js";
 import {Provider as LocationProvider } from './src/context/LocationContext.js'
+import { Provider as TrackProvider } from "./src/context/TrackContext.js";
 
 const switchNavigator = createSwitchNavigator({
   Start: StartScreen,
@@ -40,12 +41,15 @@ const App = createAppContainer(switchNavigator)
 // NOTE this gives the entire app access to the information in AuthProvider
 export default () => {
   return (
+    // NOTE the order in which you wrap your app with providers do not matter
+    <TrackProvider>
     <LocationProvider>
     <AuthProvider>
       {/* NOTE this line of code right here allows all files to use navigation */}
       <App ref={(navigator) => {setNavigator(navigator)}}/>
     </AuthProvider>
     </LocationProvider>
+    </TrackProvider>
   )
 }
 
