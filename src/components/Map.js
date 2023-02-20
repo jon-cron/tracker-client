@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import { Text, StyleSheet, ActivityIndicator  } from 'react-native';
-// NOTE this is now a dep you must install npx install react-native-maps
+// NOTE this is now a dep you must install 'npx install react-native-maps'
 import MapView, {Polyline, Circle} from "react-native-maps";
 import {Context as LocationContext} from '../context/LocationContext.js'
 
