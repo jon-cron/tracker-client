@@ -8,12 +8,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const instance = axios.create({
   baseURL: 'http://8fa9-75-174-192-122.ngrok.io'
 });
-
+// NOTE this code checks for the users Authentication upon any request made to the api
 instance.interceptors.request.use(
   async (config) => {
     const token = await AsyncStorage.getItem('token')
     if(token){
       config.headers.Authorization = `Bearer ${token}`;
+    } else {
+      console.log('please sign in')
     }
     return config;
   },
